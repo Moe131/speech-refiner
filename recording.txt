@@ -1,1 +1,5 @@
-this really happened to you I don't know if I can make it to Varsity this year but I would be really happy if I did 
+USER:
+so tomorrow I'm planning to hang out with my girlfriend and we are planning to go to the beach or wait actually tomorrow my girlfriend is coming to town around 2:00 p.m. do work starts at 4:00 p.m. so I'm not sure if I actually should go to the work or not 
+
+REFINED:
+On my schedule for tomorrow, I plan to spend time with my girlfriend. We are thinking of going to the beach. However, there's a slight change in plans. My girlfriend is coming to town around 2:00 p.m. and I have work starting at 4:00 p.m. I'm a bit unsure whether I should go to work or skip it.

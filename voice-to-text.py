@@ -1,4 +1,6 @@
 import speech_recognition as sr
+from refiner import *
+
 
 # Initialize the recogonizer
 r = sr.Recognizer()
@@ -26,11 +28,14 @@ def record_text():
         except sr.UnknownValueError as e:
             print("Unknown error")
 
-def create_text_file(text):
+def create_text_file(text, refined_text):
     with open("recording.txt", "w") as f:
-        f.write(text)
+        f.write("USER:\n" + text)
+        f.write("\n\nREFINED:\n" + refined_text)
 
 if __name__ == "__main__":
     print("Listening...")
     text = record_text()
-    create_text_file(text)
+    refined_text = refine(text)
+    create_text_file(text, refined_text)
+
