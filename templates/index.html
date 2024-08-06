@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Speech Refiner</title>
+</head>
+<body>
+    <h1> Speech Refiner</h1>
+    <button id="startButton">Start recording</button>
+    <button id="stopButton" disabled>Stop recording</button>
+    <div id="audioControls" class="hidden">
+        <p>Recording complete! Listen to your recording below:</p>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+    <div id="recordingIndicator" class="hidden">Recording...</div>
+    <br></br>
+    <form id="RefineButton" method="POST" action="/">
+        <input type="submit" value="Refine"/> 
+    </form>
+    {% for line in lines %}
+        <p> {{line}}</p>
+    {% endfor %}
+
+</body>
+<script>
+    navigator
+        .mediaDevices
+        .getUserMedia({audio: true})
+        .then(stream => { handlerFunction(stream) });
+
+    function handlerFunction(stream) {
+        rec = new MediaRecorder(stream);
+        rec.ondataavailable = e => {
+            audioChunks.push(e.data);
+            if (rec.state == "inactive") {
+                let blob = new Blob(audioChunks, {type: 'audio/mpeg-3'});
+                showAudio(blob);
+
+                sendData(blob);
+            }
+        }
+    }
+
+    function sendData(data) {
+        var form = new FormData();
+        form.append('file', data, 'data.mp3');
+        form.append('title', 'data.mp3');
+        $.ajax({
+            type: 'POST',
+            url: '/',
+            data: form,
+            cache: false,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+            console.log(data);
+        });
+    }
+
+    function showAudio(blob) {
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioControls = document.getElementById('audioControls');
+        audioPlayer.src = URL.createObjectURL(blob);
+        audioControls.classList.remove('hidden');
+    }
+
+    // Recording started
+    startButton.onclick = e => {
+        startButton.disabled = true;
+        startButton.disabled = true;
+        stopButton.disabled = false;
+        recordingIndicator.classList.remove('hidden');
+        RefineButton.classList.add('hidden');
+        audioChunks = [];
+        rec.start();
+    };
+
+    // Recording stopped
+    stopButton.onclick = e => {
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        recordingIndicator.classList.add('hidden');
+        RefineButton.classList.remove('hidden');
+        rec.stop();
+    };
+</script>
+</html>

@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form input[type="submit"] {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #007B9E;
+}
+
+p {
+    font-size: 18px;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none;
+}
+
+#recordingIndicator {
+    font-size: 18px;
+    color: red;
+    margin-top: 20px;
+    font-weight: bold;
+    animation: flash 1s infinite;
+}
+
+/* Keyframes for flashing animation */
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#RefineButton.hidden {
+    display: none;
+}
+
+#audioControls {
+    margin-top: 20px;
+}
+
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    button, form input[type="submit"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
