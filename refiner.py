@@ -34,7 +34,8 @@ def voice_to_text(recording_path):
     with open(recording_path, "rb") as audio_file:
         transcription = client.audio.transcriptions.create(
         model="whisper-1", 
-        file=audio_file
+        file=audio_file,
+        language="en"
     )
     return transcription.text
 
