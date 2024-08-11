@@ -34,8 +34,10 @@ def index():
         file.save(full_file_name)
         
         # Call the refine function to process the uploaded file
-        refined_text = refine(full_file_name)
-        session['refined_text'] = refined_text  # Store the result in the session
+        transcript = voice_to_text(full_file_name)
+        refined_text = refine(transcript)
+        chat = save_chat(full_file_name,transcript, refined_text)
+        session['refined_text'] = chat  # Store the result in the session
         # Redirect to the main page to display the refined text
         return render_template('index.html', lines=refined_text.split("\n"))
 

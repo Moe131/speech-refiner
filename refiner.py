@@ -39,13 +39,16 @@ def voice_to_text(recording_path):
     return transcription.text
 
 
-def refine(recording_path):
+def refine(transcript):
     " refines recording and returns the refined text "
-    transcript = voice_to_text(recording_path)
     refined_text = refine_text(transcript)
-    chat_file_name = recording_path.rstrip(".mp3").lstrip("recordings/")
-    with open(f"chats/{chat_file_name}.txt", "w") as f:
-        f.write("USER:\n" + transcript)
-        f.write("\n\nREFINED:\n" + refined_text)
     print(refined_text)
     return refined_text
+
+def save_chat(recording_path, transcript, refined_text):
+    """ Saved the chat in a text file"""
+    chat_file_name = recording_path.rstrip(".mp3").lstrip("recordings/")
+    chat = "USER:\n" + transcript + "\n\nREFINED:\n" + refined_text
+    with open(f"chats/{chat_file_name}.txt", "w") as f:
+        f.write(chat)
+    return chat
