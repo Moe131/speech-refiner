@@ -17,7 +17,7 @@ def refine_text(text):
         messages=[
             {
                 "role": "system",
-                "content": "Refine this speech and make it sound like a native speaker. At the end give a percentage about how native the speech initially was and give detailed feedback about what parts didn't sound like a native speaker and what the correct way of saying it is for next time. "
+                "content": "Refine this speech and make it sound like a native speaker. At the end give a percentage about how native the speech initially was and give detailed feedback about what parts didn't sound like a native speaker and what the correct way of saying it is for next time."
             },
             {
             "role": "user",
@@ -43,5 +43,9 @@ def refine(recording_path):
     " refines recording and returns the refined text "
     transcript = voice_to_text(recording_path)
     refined_text = refine_text(transcript)
+    chat_file_name = recording_path.rstrip(".mp3").lstrip("recordings/")
+    with open(f"chats/{chat_file_name}.txt", "w") as f:
+        f.write("USER:\n" + transcript)
+        f.write("\n\nREFINED:\n" + refined_text)
     print(refined_text)
     return refined_text

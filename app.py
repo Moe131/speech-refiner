@@ -4,6 +4,8 @@ import os
 from refiner import *
 
 UPLOAD_FOLDER = 'recordings'
+PREVIOUS_CHATS_FOLDER = 'chats'
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -39,4 +41,5 @@ def index():
 
 if __name__ == "__main__":
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    os.makedirs(PREVIOUS_CHATS_FOLDER, exist_ok=True)
     app.run()

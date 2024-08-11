@@ -1,3 +1,4 @@
 .env
 recordings/*
 __pycache__/*
+chats/*
